@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".33.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".31.html">Prev</a></div>
+      <div style="text-align: center"><strong>08_data_consolidation</strong></div>
+    </div>
+
+    <h3>recipelistcontroller.js</h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">(<span style="color: #008800; font-weight: bold">function</span> () {
+
+    <span style="color: #008800; font-weight: bold">function</span> RecipeListController ($scope, recipeProvider) {
+        $scope.new_recipe <span style="color: #333333">=</span> { };
+
+        $scope.recipes <span style="color: #333333">=</span> recipeProvider.getAllRecipes();
+        $scope.error_message <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;&quot;</span>;
+    
+        $scope.addRecipe <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span> (recipe_data) {
+            <span style="color: #008800; font-weight: bold">try</span> {
+                recipeProvider.addRecipe(recipe_data);
+            } <span style="color: #008800; font-weight: bold">catch</span> (e) {
+                $scope.error_message <span style="color: #333333">=</span> e.message;
+            }
+
+            <span style="color: #888888">// be sure to update our list of recipes.</span>
+            $scope.recipes <span style="color: #333333">=</span> recipeProvider.getAllRecipes();
+        };
+
+    }
+
+    recipesApp.controller(<span style="background-color: #fff0f0">&quot;RecipeListController&quot;</span>,
+                          [ <span style="background-color: #fff0f0">&#39;$scope&#39;</span>, <span style="background-color: #fff0f0">&#39;recipeProvider&#39;</span>, RecipeListController ]);
+
+})();
+</pre></div>
+
+  </body>
+</html>
+
+

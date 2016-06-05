@@ -1,0 +1,158 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".09.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".07.html">Prev</a></div>
+      <div style="text-align:center"><strong>01_mongodb_basics</strong></div>
+    </div>
+
+    <h3> 01_mongodb.js </h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">var</span> MongoClient <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;mongodb&#39;</span>).MongoClient,
+    ObjectId <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;mongodb&#39;</span>).ObjectId,
+    async <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;async&#39;</span>),
+    assert <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;assert&#39;</span>);
+
+<span style="color: #888888">// Connection URL</span>
+<span style="color: #008800; font-weight: bold">var</span> url <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;mongodb://localhost:27017/recipesapp&#39;</span>;
+
+<span style="color: #008800; font-weight: bold">var</span> db;
+
+async.waterfall([<span style="color: #008800; font-weight: bold">function</span> (cb) {
+    console.log(<span style="background-color: #fff0f0">&quot;------- connect --&quot;</span>);
+    <span style="color: #888888">// Use connect method to connect to the Server</span>
+    MongoClient.connect(url, <span style="color: #008800; font-weight: bold">function</span>(err, dbase) {
+        assert.equal(<span style="color: #008800; font-weight: bold">null</span>, err);
+        console.log(<span style="background-color: #fff0f0">&quot;Connected correctly to server&quot;</span>);
+        db <span style="color: #333333">=</span> dbase;
+        cb(<span style="color: #008800; font-weight: bold">null</span>);
+    });
+}, <span style="color: #008800; font-weight: bold">function</span> (cb) {
+    console.log(<span style="background-color: #fff0f0">&quot;------- insert many --&quot;</span>);
+    db.collection(<span style="background-color: #fff0f0">&quot;recipes&quot;</span>).insertMany(recipes, { w<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">1</span> }, <span style="color: #008800; font-weight: bold">function</span> (err, results) {
+        assert.equal(<span style="color: #008800; font-weight: bold">null</span>, err);
+        assert.equal(results.insertedCount, recipes.length);
+
+        console.log(JSON.stringify(results, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">2</span>));
+        cb(<span style="color: #008800; font-weight: bold">null</span>);
+    });
+}, <span style="color: #008800; font-weight: bold">function</span> (cb) {
+    console.log(<span style="background-color: #fff0f0">&quot;------- insert one --&quot;</span>);
+    db.collection(<span style="background-color: #fff0f0">&quot;recipes&quot;</span>).insertOne(recipe, { w<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">1</span> }, <span style="color: #008800; font-weight: bold">function</span> (err, results) {
+        assert.equal(<span style="color: #008800; font-weight: bold">null</span>, err);
+        assert.equal(results.insertedCount, <span style="color: #0000DD; font-weight: bold">1</span>);
+
+        console.log(JSON.stringify(results, <span style="color: #008800; font-weight: bold">null</span>, <span style="color: #0000DD; font-weight: bold">4</span>));
+        console.log(results.ops[<span style="color: #0000DD; font-weight: bold">0</span>]._id);
+        cb(<span style="color: #008800; font-weight: bold">null</span>, results.ops[<span style="color: #0000DD; font-weight: bold">0</span>]._id);
+    });
+}, <span style="color: #008800; font-weight: bold">function</span> (id_to_delete, cb) {
+    console.log(<span style="background-color: #fff0f0">&quot;------- deleting one --&quot;</span>);
+    db.collection(<span style="background-color: #fff0f0">&quot;recipes&quot;</span>).deleteOne({ <span style="background-color: #fff0f0">&quot;_id&quot;</span><span style="color: #333333">:</span> ObjectId(id_to_delete) },
+                                       { w<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">1</span> }, <span style="color: #008800; font-weight: bold">function</span> (err, results) {
+        assert.equal(<span style="color: #008800; font-weight: bold">null</span>, err);
+        console.log(JSON.stringify(results, <span style="color: #008800; font-weight: bold">null</span>, <span style="color: #0000DD; font-weight: bold">4</span>));
+        cb(<span style="color: #008800; font-weight: bold">null</span>);
+    });
+}, <span style="color: #008800; font-weight: bold">function</span> (cb) {
+    console.log(<span style="background-color: #fff0f0">&quot;------- stream over entries --&quot;</span>);
+<strong>    <span style="color: #008800; font-weight: bold">var</span> cursor <span style="color: #333333">=</span> db.collection(<span style="background-color: #fff0f0">&quot;recipes&quot;</span>)
+        .find({ })
+        .sort({ type<span style="color: #333333">:</span> <span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>, name<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">1</span> })
+        .limit(<span style="color: #0000DD; font-weight: bold">2</span>);
+
+    cursor.on(<span style="background-color: #fff0f0">&quot;data&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> (recipe) {
+        console.log(recipe);
+    });
+    cursor.once(<span style="background-color: #fff0f0">&quot;end&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> () {
+        console.log(<span style="background-color: #fff0f0">&quot;== no more recipes. ending.&quot;</span>);
+        cb(<span style="color: #008800; font-weight: bold">null</span>);
+    });</strong>
+}], <span style="color: #008800; font-weight: bold">function</span> (err, results) {
+    console.log(<span style="background-color: #fff0f0">&quot;DONE!&quot;</span>);
+    db.close();
+});
+
+
+
+
+
+<span style="color: #008800; font-weight: bold">var</span> recipe <span style="color: #333333">=</span> {
+    recipe_id<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;blargle&quot;</span>,
+    name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Fancy Pants Dish&#39;</span>,
+    serves<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">4</span>,
+    preparation_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">150</span>,
+    cooking_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">100</span>,
+    ingredients<span style="color: #333333">:</span> [ <span style="background-color: #fff0f0">&quot;1 cow&quot;</span>, <span style="background-color: #fff0f0">&quot;50 potatoes&quot;</span>, <span style="background-color: #fff0f0">&quot;500 brussel sprouts&quot;</span> ],
+    type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Fancy&#39;</span>,
+    summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;OMG this is posh.&#39;</span>,
+    preparation<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;MEAT GRINDER COOK AW YISSS!!!!.&quot;</span>
+};
+
+
+
+<span style="color: #008800; font-weight: bold">var</span> recipes <span style="color: #333333">=</span> [ { 
+      recipe_id<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;pasta_al_pesto&quot;</span>,
+      name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Pasta al Pesto&#39;</span>,
+      serves<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+      preparation_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+      cooking_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">15</span>,
+      ingredients<span style="color: #333333">:</span> [ <span style="background-color: #fff0f0">&quot;400g spaghetti&quot;</span>, <span style="background-color: #fff0f0">&quot;4tbsp pesto sauce&quot;</span>, <span style="background-color: #fff0f0">&quot;salt to taste&quot;</span> ],
+      type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Italian&#39;</span>,
+      summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;A quick and simple dish for any Italian household.&#39;</span>,
+      preparation<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;Boil the pasta, add the sauce.&quot;</span>
+  }, {
+      recipe_id<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;garilic_pork&quot;</span>,
+      name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Garlic Pork&#39;</span>,
+      serves<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+      preparation_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">15</span>,
+      cooking_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">5</span>,
+      ingredients<span style="color: #333333">:</span> [ <span style="background-color: #fff0f0">&quot;200g pork loin steak&quot;</span>, <span style="background-color: #fff0f0">&quot;6 cloves garlic&quot;</span>, <span style="background-color: #fff0f0">&quot;2tbsp vegetable oil&quot;</span>,
+                     <span style="background-color: #fff0f0">&quot;2tbsp fish sauce&quot;</span>, <span style="background-color: #fff0f0">&quot;black pepper to taste&quot;</span>, <span style="background-color: #fff0f0">&quot;salt to taste&quot;</span> ],
+      type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Thai&#39;</span>,
+      summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;A quick and simple meat dish for any Thai table.&#39;</span>,
+      preparation<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;Chop it all up, fry it all up. Wup wup!&quot;</span>
+  }, {
+      recipe_id<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;garilic_broccoli&quot;</span>,
+      name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Garlic Broccoli&#39;</span>,
+      serves<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+      preparation_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">15</span>,
+      cooking_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+      ingredients<span style="color: #333333">:</span> [ <span style="background-color: #fff0f0">&quot;400g broccoli&quot;</span>, <span style="background-color: #fff0f0">&quot;2 cloves garlic&quot;</span>, <span style="background-color: #fff0f0">&quot;2tbsp vegetable oil&quot;</span>,
+                     <span style="background-color: #fff0f0">&quot;1tsp light soy sauce&quot;</span>, <span style="background-color: #fff0f0">&quot;1/4tsp sugar&quot;</span>, <span style="background-color: #fff0f0">&quot;1/4tsp salt&quot;</span>,
+                     <span style="background-color: #fff0f0">&quot;1tsp corn starch&quot;</span> ],
+      type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Chinese&#39;</span>,
+      summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Healthy and full of flavour, a simple dish.&#39;</span>,
+      preparation<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;Boil Broccoli for 2 mins, chop everything up,\n\n fry it all &quot;</span>
+                   <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;up. Add salt, sugar, and soy sauce.&quot;</span>
+  }, {
+      recipe_id<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;black_pepper_beef_00131234&quot;</span>,
+      name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Black Pepper Beef&#39;</span>,
+      serves<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+      preparation_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">20</span>,
+      cooking_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">5</span>,
+      ingredients<span style="color: #333333">:</span> [ <span style="background-color: #fff0f0">&quot;200g lean beef&quot;</span>, <span style="background-color: #fff0f0">&quot;2 cloves garlic&quot;</span>, <span style="background-color: #fff0f0">&quot;2tbsp vegetable oil&quot;</span>,
+                     <span style="background-color: #fff0f0">&quot;1tsp light soy sauce&quot;</span>, <span style="background-color: #fff0f0">&quot;1/4tsp sugar&quot;</span>, <span style="background-color: #fff0f0">&quot;1/4tsp salt&quot;</span>,
+                     <span style="background-color: #fff0f0">&quot;1tsp dark soy sauce&quot;</span> ],
+      type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Chinese&#39;</span>,
+      summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Delicious and rich in flavour. A Chinese classic.&#39;</span>,
+      preparation<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;chop it up, fry it up, try not to set your kitchen on fire.&quot;</span>
+  }
+];
+  
+</pre></div>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
+
+

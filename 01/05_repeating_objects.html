@@ -1,0 +1,19 @@
+<html ng-app>
+<head>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script type='text/javascript' src="angular.min.js"></script>
+</head>
+<body style="padding: 50px" 
+      ng-init="recipes = [ 
+               { name: 'Pasta al Pesto', type: 'Italian', summary: 'A quick and simple dish for any Italian household.' },
+               { name: 'Garlic Broccoli', type: 'Chinese', summary: 'Healthy and full of flavour, a simple dish.' },
+               { name: 'Garlic Pork', type: 'Thai', summary: 'A quick and simple meat dish for any Thai table.' },
+               { name: 'Black Pepper Beef', type: 'Chinese', summary: 'Delicious and rich in flavour. A Chinese classic.' },]">
+
+  <ul>
+    <li ng-repeat="recipe in recipes">{{ recipe.name }} - {{ recipe.type }} </li>
+  </ul>
+  <p> There are {{ recipes.length }} recipes so far!</p>
+
+</body>
+</html>

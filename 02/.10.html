@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".11.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".09.html">Prev</a></div>
+      <div style="text-align: center"><strong>04_serving_static</strong></div>
+    </div>
+
+    <h3>controller.js</h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">(<span style="color: #008800; font-weight: bold">function</span> () {
+
+    <span style="color: #888888">// 2. create the controller and give it $scope.</span>
+    <span style="color: #008800; font-weight: bold">function</span> RecipeListController ($scope) {
+        $scope.new_recipe <span style="color: #333333">=</span> { };
+    
+        $scope.recipes <span style="color: #333333">=</span> [
+            { name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Pasta al Pesto&#39;</span>,
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Italian&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;A quick and simple dish for any Italian household.&#39;</span> },
+            { name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Garlic Pork&#39;</span>,
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Thai&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;A quick and simple meat dish for any Thai table.&#39;</span> },
+            { name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Garlic Broccoli&#39;</span>,
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Chinese&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Healthy and full of flavour, a simple dish.&#39;</span> },
+            { name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Black Pepper Beef&#39;</span>,
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Chinese&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Delicious and rich in flavour. A Chinese classic.&#39;</span> }
+        ];
+        $scope.addRecipe <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span> (recipe_data) {
+            $scope.recipes.push(recipe_data);
+            $scope.new_recipe <span style="color: #333333">=</span> { };
+        };
+    }
+
+    recipesApp.controller(<span style="background-color: #fff0f0">&quot;RecipeListController&quot;</span>, [<span style="background-color: #fff0f0">&#39;$scope&#39;</span>, RecipeListController ]);
+
+})();
+</pre></div>
+
+  </body>
+</html>
+
+

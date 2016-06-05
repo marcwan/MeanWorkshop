@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".13.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".11.html">Prev</a></div>
+      <div style="text-align:center"><strong>02_mongodb_in_app</strong></div>
+    </div>
+
+    <h3>data/db.js</h3>
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">var</span> MongoClient <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;mongodb&#39;</span>).MongoClient,
+    ObjectId <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;mongodb&#39;</span>).ObjectId,
+    async <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;async&#39;</span>),
+    assert <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;assert&#39;</span>);
+
+<span style="color: #888888">// Connection URL</span>
+<span style="color: #008800; font-weight: bold">var</span> url <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;mongodb://localhost:27017/recipesapp&#39;</span>;
+
+<span style="color: #008800; font-weight: bold">var</span> _db;
+
+
+exports.init_db <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span> (callback) {
+    MongoClient.connect(url, <span style="color: #008800; font-weight: bold">function</span>(err, db) {
+        assert.equal(<span style="color: #008800; font-weight: bold">null</span>, err);
+        console.log(<span style="background-color: #fff0f0">&quot;Connected correctly to MongoDB server.&quot;</span>);
+        _db <span style="color: #333333">=</span> db;
+
+        <span style="color: #888888">// Got the connection, now get the recipes collection. It&#39;s easy.</span>
+        exports.recipes <span style="color: #333333">=</span> _db.collection(<span style="background-color: #fff0f0">&quot;recipes&quot;</span>);
+        callback(<span style="color: #008800; font-weight: bold">null</span>);
+    });
+}    
+
+<span style="color: #888888">// Anybody can just grab this and start making queries on it if they want.</span>
+exports.recipes <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span>;
+</pre></div>
+
+
+
+
+  </body>
+</html>

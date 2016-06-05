@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".26.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".24.html">Prev</a></div>
+      <div style="text-align: center"><strong>07_more_pages</strong></div>
+    </div>
+
+    <h3>viewrecipecontroller.js</h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">(<span style="color: #008800; font-weight: bold">function</span> () {
+
+    <span style="color: #888888">// 1. declare our controller.</span>
+    <span style="color: #008800; font-weight: bold">function</span> ViewRecipeController ($scope, $routeParams) {
+    
+        <span style="color: #008800; font-weight: bold">var</span> recipes <span style="color: #333333">=</span> [
+            { recipe_id<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;pasta_al_pesto&quot;</span>,
+              name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Pasta al Pesto&#39;</span>,
+              serves<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+              preparation_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+              cooking_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">15</span>,
+              ingredients<span style="color: #333333">:</span> [ <span style="background-color: #fff0f0">&quot;400g spaghetti&quot;</span>, <span style="background-color: #fff0f0">&quot;4tbsp pesto sauce&quot;</span>,
+                             <span style="background-color: #fff0f0">&quot;salt to taste&quot;</span> ],
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Italian&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;A quick and simple dish for any Italian home.&#39;</span>,
+              preparation<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;Boil the pasta, add the sauce.&quot;</span> },
+            { recipe_id<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;garilic_pork&quot;</span>,
+              name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Garlic Pork&#39;</span>,
+              serves<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+              preparation_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">15</span>,
+              cooking_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">5</span>,
+              ingredients<span style="color: #333333">:</span> [ <span style="background-color: #fff0f0">&quot;200g pork loin steak&quot;</span>, <span style="background-color: #fff0f0">&quot;6 cloves garlic&quot;</span>,
+                             <span style="background-color: #fff0f0">&quot;2tbsp vegetable oil&quot;</span>, <span style="background-color: #fff0f0">&quot;2tbsp fish sauce&quot;</span>,
+                             <span style="background-color: #fff0f0">&quot;black pepper to taste&quot;</span>, <span style="background-color: #fff0f0">&quot;salt to taste&quot;</span> ],
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Thai&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;A quick and simple meat dish for any Thai table.&#39;</span>,
+              preparation<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;Chop it all up, fry it all up. Wup wup!&quot;</span> },
+            { recipe_id<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;garilic_broccoli&quot;</span>,
+              name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Garlic Broccoli&#39;</span>,
+              serves<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+              preparation_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">15</span>,
+              cooking_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+              ingredients<span style="color: #333333">:</span> [ <span style="background-color: #fff0f0">&quot;400g broccoli&quot;</span>, <span style="background-color: #fff0f0">&quot;2 cloves garlic&quot;</span>,
+                             <span style="background-color: #fff0f0">&quot;2tbsp vegetable oil&quot;</span>, <span style="background-color: #fff0f0">&quot;1tsp light soy sauce&quot;</span>,
+                             <span style="background-color: #fff0f0">&quot;1/4tsp sugar&quot;</span>, <span style="background-color: #fff0f0">&quot;1/4tsp salt&quot;</span>, <span style="background-color: #fff0f0">&quot;1tsp corn starch&quot;</span> ],
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Chinese&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Healthy and full of flavour, a simple dish.&#39;</span>,
+              preparation<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;Boil Broccoli for 2 mins, chop everything up,\n\n fry&quot;</span>
+                           <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot; it all up. Add salt, sugar, and soy sauce.&quot;</span> },
+            { recipe_id<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;black_pepper_beef_00131234&quot;</span>,
+              name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Black Pepper Beef&#39;</span>,
+              serves<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">2</span>,
+              preparation_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">20</span>,
+              cooking_time<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">5</span>,
+              ingredients<span style="color: #333333">:</span> [ <span style="background-color: #fff0f0">&quot;200g lean beef&quot;</span>, <span style="background-color: #fff0f0">&quot;2 cloves garlic&quot;</span>,
+                             <span style="background-color: #fff0f0">&quot;2tbsp vegetable oil&quot;</span>, <span style="background-color: #fff0f0">&quot;1tsp light soy sauce&quot;</span>,
+                             <span style="background-color: #fff0f0">&quot;1/4tsp sugar&quot;</span>, <span style="background-color: #fff0f0">&quot;1/4tsp salt&quot;</span>, <span style="background-color: #fff0f0">&quot;1tsp dark soy sauce&quot;</span> ],
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Chinese&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Delicious and rich in flavour. A Chinese classic.&#39;</span>,
+              preparation<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;chop it up, fry it up, try not to set your&quot;</span>
+                           <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;kitchen on fire.&quot;</span> }
+        ];
+
+        <span style="color: #008800; font-weight: bold">var</span> i;
+        <span style="color: #008800; font-weight: bold">for</span> (i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>; i <span style="color: #333333">&lt;</span> recipes.length; i<span style="color: #333333">++</span>) {
+            <span style="color: #008800; font-weight: bold">if</span> (recipes[i].recipe_id <span style="color: #333333">==</span> $routeParams.recipe_id) {
+                <span style="color: #008800; font-weight: bold">break</span>;
+            }
+        }
+
+        <span style="color: #008800; font-weight: bold">if</span> (i <span style="color: #333333">&gt;</span> recipes.length) {
+            <span style="color: #888888">// ???</span>
+        }
+
+        $scope.recipe <span style="color: #333333">=</span> recipes[i];
+    }
+
+    <span style="color: #888888">// 2. create the controller and give it $scope.</span>
+    recipesApp.controller(<span style="background-color: #fff0f0">&quot;ViewRecipeController&quot;</span>, [ <span style="background-color: #fff0f0">&#39;$scope&#39;</span>, <span style="background-color: #fff0f0">&#39;$routeParams&#39;</span>
+                                                   , ViewRecipeController ]);
+
+})();
+</pre></div>
+
+  </body>
+</html>
+
+

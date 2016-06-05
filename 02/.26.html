@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".27.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".25.html">Prev</a></div>
+      <div style="text-align: center"><strong>07_more_pages</strong></div>
+    </div>
+
+    <h3>view_recipe.html</h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;right-button&quot;</span><span style="color: #007700">&gt;&lt;a</span> <span style="color: #0000CC">href</span> <span style="color: #0000CC">ng-href=</span><span style="background-color: #fff0f0">&quot;#/recipes&quot;</span><span style="color: #007700">&gt;</span>Back <span style="color: #007700">&lt;/a&gt;&lt;/div&gt;</span>
+
+<span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;page-header&quot;</span><span style="color: #007700">&gt;</span>
+  <span style="color: #007700">&lt;h1&gt;</span>{{ recipe.name }} <span style="color: #007700">&lt;span</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&#39;smaller lighter&#39;</span><span style="color: #007700">&gt;</span>({{ recipe.type }})<span style="color: #007700">&lt;/span&gt;&lt;/h1&gt;</span>
+  <span style="color: #007700">&lt;/div&gt;</span>
+
+<span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;panel panel-default&quot;</span><span style="color: #007700">&gt;</span>
+  <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;panel-heading&quot;</span><span style="color: #007700">&gt;</span>
+    <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;float: right&quot;</span><span style="color: #007700">&gt;</span>Serves: {{ recipe.serves }}<span style="color: #007700">&lt;/div&gt;</span>
+    <span style="color: #007700">&lt;div&gt;&lt;strong&gt;</span>Preparation Time<span style="color: #007700">&lt;/strong&gt;</span>:
+    {{ recipe.preparation_time }} minute(s) <span style="color: #007700">&lt;/div&gt;</span>
+  <span style="color: #007700">&lt;/div&gt;</span>
+  <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;panel-body&quot;</span><span style="color: #007700">&gt;</span> {{ recipe.summary }}<span style="color: #007700">&lt;/div&gt;</span>
+<span style="color: #007700">&lt;/div&gt;</span>
+
+<span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;bs-callout bs-callout-info&quot;</span><span style="color: #007700">&gt;</span>
+<span style="color: #007700">&lt;h4&gt;</span>Ingredients<span style="color: #007700">&lt;/h4&gt;</span>
+<span style="color: #007700">&lt;ul&gt;</span>
+  <span style="color: #007700">&lt;li</span> <span style="color: #0000CC">ng-repeat=</span><span style="background-color: #fff0f0">&quot;ingredient in recipe.ingredients&quot;</span><span style="color: #007700">&gt;</span>{{ ingredient }}<span style="color: #007700">&lt;/li&gt;</span>
+<span style="color: #007700">&lt;/ul&gt;</span>
+<span style="color: #007700">&lt;/div&gt;</span>
+
+<span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;bs-callout bs-callout-info&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;margin-top: 30px&quot;</span><span style="color: #007700">&gt;</span>
+<span style="color: #007700">&lt;h4&gt;</span>Preparation<span style="color: #007700">&lt;/h4&gt;</span>
+<span style="color: #007700">&lt;p</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;preparation&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&#39;font-family: Helvetica&#39;</span><span style="color: #007700">&gt;</span> {{ recipe.preparation }} <span style="color: #007700">&lt;/p&gt;</span>
+<span style="color: #007700">&lt;/div&gt;</span>
+</pre></div>
+
+  </body>
+</html>
+
+

@@ -1,0 +1,24 @@
+
+body {
+    margin: 20px;
+    background-color: #dddddd;
+    font-size: 150%;
+    color: #666666;
+}
+
+strong {
+    color: black;
+}
+
+div.header {
+    min-height: 40px;
+}
+
+div.header a {
+    text-decoration: none;
+    font-family: Helvetica;
+    color: blue;
+}
+div.header a:hover {
+    text-decoration: underline;
+}

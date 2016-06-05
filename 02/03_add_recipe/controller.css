@@ -1,0 +1,20 @@
+
+body {
+    padding: 50px;
+}
+
+.recipe {
+    width: 300px;
+    min-height: 150px;
+    float: left;
+    margin: 10px;
+}
+.recipe-editor {
+    width: 600px;
+    float: left;
+    margin: 10px;
+}
+
+.recipe-editor textarea {
+    border-color: #dddddd;
+}

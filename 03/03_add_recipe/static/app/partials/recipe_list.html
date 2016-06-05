@@ -1,0 +1,40 @@
+
+  <div class="alert alert-danger" ng-show="page_load_error"> {{ page_load_error }} </div>
+
+  <div ng-show="!finished_loading"><h4 style="color: #aaaaaa"> Loading ... please wait a moment </h4></div>
+
+  <div ng-show="finished_loading">
+    <p>Filter list: <input ng-model="searchFor" size="30"/></p>
+
+    <div ng-repeat="recipe in recipes | filter:searchFor | orderBy: 'type'"
+         class="recipe panel panel-default">
+      <div class="panel-heading"><a href ng-href="#/recipes/{{recipe.recipe_id}}">{{ recipe.name }} ({{ recipe.type }})</a></div>
+      <div class="panel-body">
+        {{ recipe.summary }}
+      </div>
+    </div>
+    <div style="clear: left"></div>
+    <p> There are {{ recipes.length }} recipes so far!</p>
+
+    <h3 style="margin-top: 50px"> Add New Recipe</h3>
+    <div class="alert alert-danger" ng-show="add_recipe_error" role="alert">{{ add_recipe_error }}</div>
+
+    <div class="recipe-editor panel panel-default">
+      <div class="panel-heading">
+        <input type="text" placeholder="Recipe Name..." size="30" ng-model="new_recipe.name"/>
+        <div class="recipename" >
+          <input type="text" placeholder="Type of Cuisine" size="30" ng-model="new_recipe.type"/>
+        </div>
+      </div>
+      <div class="panel-body">
+        <p>
+          <textarea ng-model="new_recipe.summary" placeholder="Summary..." rows='4' style="width: 100%"></textarea>
+        </p>
+        <p>
+          <input type="text" ng-model="new_recipe.preparation_time" placeholder="Preparation Time..." style="width: 100%"/>
+          <input type="text" ng-model="new_recipe.cooking_time" placeholder="Cooking Time..." style="width: 100%"/>
+        </p>
+        <button ng-click="addRecipe(new_recipe)" type="button" class="btn btn-success">Save Recipe</button>
+      </div>
+    </div>
+  </div>

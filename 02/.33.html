@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: left; padding 10px"><a href=".32.html">Prev</a></div>
+      <div style="text-align: center"><strong>08_data_consolidation</strong></div>
+    </div>
+
+    <h3>viewrecipecontroller.js</h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">(<span style="color: #008800; font-weight: bold">function</span> () {
+
+    <span style="color: #008800; font-weight: bold">function</span> ViewRecipeController ($scope, $routeParams, recipeProvider) {
+
+        $scope.recipe <span style="color: #333333">=</span> recipeProvider.getRecipeById($routeParams.recipe_id);
+
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>$scope.recipe) {
+            console.log(<span style="background-color: #fff0f0">&quot;TODO(marc): don&#39;t be lazy ya bum!&quot;</span>);
+        }
+
+    }
+
+   recipesApp.controller(<span style="background-color: #fff0f0">&quot;ViewRecipeController&quot;</span>,
+                         [ <span style="background-color: #fff0f0">&#39;$scope&#39;</span>, <span style="background-color: #fff0f0">&#39;$routeParams&#39;</span>,
+                           <span style="background-color: #fff0f0">&#39;recipeProvider&#39;</span>, ViewRecipeController ]);
+
+})();
+</pre></div>
+
+  </body>
+</html>
+
+

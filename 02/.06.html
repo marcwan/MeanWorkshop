@@ -1,0 +1,118 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".07.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".05.html">Prev</a></div>
+      <div style="text-align: center"><strong>03_add_recipe</strong></div>
+    </div>
+
+<h3> controller.css </h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007700">body</span> {
+    <span style="color: #008800; font-weight: bold">padding</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">50px</span>;
+}
+
+<span style="color: #BB0066; font-weight: bold">.recipe</span> {
+    <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">300px</span>;
+    <span style="color: #008800; font-weight: bold">min-height</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">150px</span>;
+    <span style="color: #008800; font-weight: bold">float</span><span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">left</span>;
+    <span style="color: #008800; font-weight: bold">margin</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">10px</span>;
+}
+<span style="color: #BB0066; font-weight: bold">.recipe-editor</span> {
+    <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">600px</span>;
+    <span style="color: #008800; font-weight: bold">float</span><span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">left</span>;
+    <span style="color: #008800; font-weight: bold">margin</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">10px</span>;
+}
+
+<span style="color: #BB0066; font-weight: bold">.recipe-editor</span> <span style="color: #007700">textarea</span> {
+    <span style="color: #008800; font-weight: bold">border-color</span><span style="color: #333333">:</span> #dddddd;
+}
+</pre></div>
+
+<h3>controller.html</h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;html</span> <span style="color: #0000CC">ng-app=</span><span style="background-color: #fff0f0">&quot;recipesApp&quot;</span><span style="color: #007700">&gt;</span>
+<span style="color: #007700">&lt;head&gt;</span>
+  <span style="color: #007700">&lt;link</span> <span style="color: #0000CC">rel=</span><span style="background-color: #fff0f0">&quot;stylesheet&quot;</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;css/bootstrap.css&quot;</span><span style="color: #007700">&gt;</span>
+  <span style="color: #007700">&lt;link</span> <span style="color: #0000CC">rel=</span><span style="background-color: #fff0f0">&quot;stylesheet&quot;</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;controller.css&quot;</span><span style="color: #007700">&gt;</span>
+  <span style="color: #007700">&lt;script </span><span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&#39;text/javascript&#39;</span> <span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;angular.min.js&quot;</span><span style="color: #007700">&gt;&lt;/script&gt;</span>
+
+<span style="color: #007700">&lt;/head&gt;</span>
+<span style="color: #007700">&lt;body</span> <span style="color: #0000CC">ng-controller=</span><span style="background-color: #fff0f0">&quot;RecipeListController&quot;</span><span style="color: #007700">&gt;</span>
+
+
+  <span style="color: #007700">&lt;p&gt;</span>Filter list: <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">ng-model=</span><span style="background-color: #fff0f0">&quot;searchFor&quot;</span> <span style="color: #0000CC">size=</span><span style="background-color: #fff0f0">&quot;30&quot;</span><span style="color: #007700">/&gt;&lt;/p&gt;</span>
+
+    <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">ng-repeat=</span><span style="background-color: #fff0f0">&quot;recipe in recipes | filter:searchFor | orderBy: &#39;type&#39;&quot;</span>
+         <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;recipe panel panel-default&quot;</span><span style="color: #007700">&gt;</span>
+    <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;panel-heading&quot;</span><span style="color: #007700">&gt;</span> {{ recipe.name }} ({{ recipe.type }})<span style="color: #007700">&lt;/div&gt;</span>
+    <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;panel-body&quot;</span><span style="color: #007700">&gt;</span>
+      {{ recipe.summary }}
+    <span style="color: #007700">&lt;/div&gt;</span>
+  <span style="color: #007700">&lt;/div&gt;</span>
+  <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;clear: left&quot;</span><span style="color: #007700">&gt;&lt;/div&gt;</span>
+  <span style="color: #007700">&lt;p&gt;</span> There are {{ recipes.length }} recipes so far!<span style="color: #007700">&lt;/p&gt;</span>
+
+  <span style="color: #007700">&lt;h3</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;margin-top: 50px&quot;</span><span style="color: #007700">&gt;</span> Add New Recipe<span style="color: #007700">&lt;/h3&gt;</span>
+  <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;recipe-editor panel panel-default&quot;</span><span style="color: #007700">&gt;</span>
+    <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;panel-heading&quot;</span><span style="color: #007700">&gt;</span>
+      <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Recipe Name...&quot;</span> <span style="color: #0000CC">size=</span><span style="background-color: #fff0f0">&quot;30&quot;</span>
+       <span style="color: #0000CC">ng-model=</span><span style="background-color: #fff0f0">&quot;new_recipe.name&quot;</span><span style="color: #007700">/&gt;</span>
+      <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;recipename&quot;</span> <span style="color: #007700">&gt;</span>
+        <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Type of Cuisine&quot;</span> <span style="color: #0000CC">size=</span><span style="background-color: #fff0f0">&quot;30&quot;</span>
+       <span style="color: #0000CC">ng-model=</span><span style="background-color: #fff0f0">&quot;new_recipe.type&quot;</span><span style="color: #007700">/&gt;</span>
+      <span style="color: #007700">&lt;/div&gt;</span>
+    <span style="color: #007700">&lt;/div&gt;</span>
+    <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;panel-body&quot;</span><span style="color: #007700">&gt;</span>
+      <span style="color: #007700">&lt;p&gt;</span>
+        <span style="color: #007700">&lt;textarea</span> <span style="color: #0000CC">ng-model=</span><span style="background-color: #fff0f0">&quot;new_recipe.summary&quot;</span> <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Summary...&quot;</span>
+         <span style="color: #0000CC">rows=</span><span style="background-color: #fff0f0">&#39;4&#39;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width: 100%&quot;</span><span style="color: #007700">&gt;&lt;/textarea&gt;</span>
+      <span style="color: #007700">&lt;/p&gt;</span>
+      <span style="color: #007700">&lt;p&gt;</span>
+        <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">ng-model=</span><span style="background-color: #fff0f0">&quot;new_recipe.preparation_time&quot;</span>
+         <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Preparation Time...&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width: 100%&quot;</span><span style="color: #007700">/&gt;</span>
+        <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">ng-model=</span><span style="background-color: #fff0f0">&quot;new_recipe.cooking_time&quot;</span>
+         <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Cooking Time...&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width: 100%&quot;</span><span style="color: #007700">/&gt;</span>
+      <span style="color: #007700">&lt;/p&gt;</span>
+      <span style="color: #007700">&lt;button</span> <span style="color: #0000CC">ng-click=</span><span style="background-color: #fff0f0">&quot;addRecipe(new_recipe)&quot;</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;button&quot;</span>
+       <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;btn btn-success&quot;</span><span style="color: #007700">&gt;</span>Save Recipe<span style="color: #007700">&lt;/button&gt;</span>
+    <span style="color: #007700">&lt;/div&gt;</span>
+  <span style="color: #007700">&lt;/div&gt;</span>
+
+<span style="color: #007700">&lt;script </span><span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text/javascript&quot;</span><span style="color: #007700">&gt;</span>
+    <span style="color: #888888">// 1. create the module / app, make sure ng-app points to it.</span>
+    <span style="color: #008800; font-weight: bold">var</span> recipesApp <span style="color: #333333">=</span> angular.module(<span style="background-color: #fff0f0">&#39;recipesApp&#39;</span>, []);
+    <span style="color: #888888">// 2. create the controller and give it $scope.</span>
+    recipesApp.controller(<span style="background-color: #fff0f0">&quot;RecipeListController&quot;</span>, [<span style="background-color: #fff0f0">&#39;$scope&#39;</span>, <span style="color: #008800; font-weight: bold">function</span>($scope) {
+        $scope.recipes <span style="color: #333333">=</span> [
+            { name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Pasta al Pesto&#39;</span>,
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Italian&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;A quick and simple dish for any Italian household.&#39;</span> },
+            { name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Garlic Pork&#39;</span>,
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Thai&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;A quick and simple meat dish for any Thai table.&#39;</span> },
+            { name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Garlic Broccoli&#39;</span>,
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Chinese&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Healthy and full of flavour, a simple dish.&#39;</span> },
+            { name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Black Pepper Beef&#39;</span>,
+              type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Chinese&#39;</span>,
+              summary<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Delicious and rich in flavour. A Chinese classic.&#39;</span> }
+        ];
+
+<strong>        $scope.addRecipe <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span> (recipe_data) {
+            $scope.recipes.push(recipe_data);
+        }
+</strong>
+    }]);
+
+<span style="color: #007700">&lt;/script&gt;</span>
+
+<span style="color: #007700">&lt;/body&gt;</span>
+<span style="color: #007700">&lt;/html&gt;</span>
+</pre></div>
+
+  </body>
+</html>
+
+

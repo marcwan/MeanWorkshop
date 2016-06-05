@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".02.html">Next</a></div>
+      <div style="text-align:center"><strong>01_simple_serving</strong></div>
+    </div>
+
+    <h3> A look at our folder structure </h3>
+    <pre>
+    <strong>server/</strong>
+    server/index.js
+    server/package.json
+    <strong>static/</strong>
+    static/app/app.js
+    static/app/controllers/recipelistcontroller.js
+    static/app/controllers/viewrecipecontroller.js
+    static/app/partials/recipe_list.html
+    static/app/partials/view_recipe.html
+    static/app/services/recipeprovider.js
+    static/css/*
+    static/css/recipes.css
+    static/fonts/*
+    static/index.html
+    static/js/*
+
+    --&gt; static/ folder is just all the files we had from previous exercise!
+        </pre>
+      
+
+<h3> package.json </h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">{
+    <span style="color: #007700">&quot;name&quot;</span>: <span style="background-color: #fff0f0">&quot;recipe_app_server&quot;</span>,
+    <span style="color: #007700">&quot;description&quot;</span>: <span style="background-color: #fff0f0">&quot;Simple backend for our recipes app.&quot;</span>,
+    <span style="color: #007700">&quot;private&quot;</span>: <span style="color: #008800; font-weight: bold">true</span>,
+    <span style="color: #007700">&quot;dependencies&quot;</span>: {
+        <span style="color: #007700">&quot;async&quot;</span>: <span style="background-color: #fff0f0">&quot;1.x&quot;</span>,
+        <span style="color: #007700">&quot;express&quot;</span>: <span style="background-color: #fff0f0">&quot;4.x&quot;</span>,
+        <span style="color: #007700">&quot;morgan&quot;</span>: <span style="background-color: #fff0f0">&quot;1.x&quot;</span>
+    }
+}
+</pre></div>
+
+<h3> Install the mode modules </h3>
+
+<pre>
+     % cd server
+     % <strong>npm update</strong>
+
+
+     Look for node_modules/
+
+     
+</pre>  
+
+
+
+
+
+  </body>
+</html>
+
+

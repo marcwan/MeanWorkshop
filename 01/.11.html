@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: left; padding 10px"><a href=".10.html">Prev</a></div>
+<!--      <div style="float: right; padding 10px"><a href=".11.html">Next</a></div> -->
+    </div>
+
+<pre>
+&lt;html ng-app&gt;
+&lt;head&gt;
+  &lt;link rel="stylesheet" href="css/bootstrap.css"&gt;
+  &lt;script type='text/javascript' src="angular.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body style="padding: 50px" 
+      ng-init="recipes = [ 
+               { name: 'Pasta al Pesto', type: 'Italian',
+                 summary: 'A quick and simple dish for any Italian household.' },
+               { name: 'Garlic Broccoli', type: 'Chinese',
+                 summary: 'Healthy and full of flavour, a simple dish.' },
+               { name: 'Garlic Pork', type: 'Thai',
+                 summary: 'A quick and simple meat dish for any Thai table.' },
+               { name: 'Black Pepper Beef', type: 'Chinese',
+                 summary: 'Delicious and rich in flavour. A Chinese classic.' },]"&gt;
+
+
+  &lt;p&gt;Filter list: &lt;input ng-model="searchFor" size="30"/&gt;&lt;/p&gt;
+
+  &lt;div style="width: 300px; float: left; margin-right: 20px; min-height: 125px"
+       ng-repeat="<strong>recipe in filtered
+                    = (recipes | filter: { name: searchFor } | orderBy: 'type')</strong>"
+       class="panel panel-default"&gt;
+    &lt;div class="panel-heading"&gt; {{ recipe.name }} ({{ recipe.type }})&lt;/div&gt;
+    &lt;div class="panel-body"&gt;
+      {{ recipe.summary }}
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div style="clear: left"&gt;&lt;/div&gt;
+  &lt;p&gt; There are {{ filtered.length }} recipes that match!&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+  </body>
+</html>

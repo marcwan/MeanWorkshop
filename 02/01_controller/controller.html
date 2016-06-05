@@ -1,0 +1,49 @@
+<html ng-app="recipesApp">
+<head>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="controller.css">
+  <script type='text/javascript' src="angular.min.js"></script>
+
+</head>
+<body
+      ng-controller="RecipeListController">
+
+
+  <p>Filter list: <input ng-model="searchFor" size="30"/></p>
+
+    <div ng-repeat="recipe in recipes | filter:searchFor | orderBy: 'type'"
+         class="recipe panel panel-default">
+    <div class="panel-heading"> {{ recipe.name }} ({{ recipe.type }})</div>
+    <div class="panel-body">
+      {{ recipe.summary }}
+    </div>
+  </div>
+  <div style="clear: left"></div>
+  <p> There are {{ recipes.length }} recipes so far!</p>
+
+<script type="text/javascript">
+    // 1. create the module / app, make sure ng-app points to it.
+    var recipesApp = angular.module('recipesApp', []);
+    // 2. create the controller and give it $scope.
+    recipesApp.controller("RecipeListController", ['$scope', function($scope) {
+        $scope.recipes = [ { name: 'Pasta al Pesto',
+                             type: 'Italian',
+                             summary: 'A quick and simple dish for any Italian household.' },
+                           { name: 'Garlic Pork',
+                             type: 'Thai',
+                             summary: 'A quick and simple meat dish for any Thai table.' },
+                           { name: 'Garlic Broccoli',
+                             type: 'Chinese',
+                             summary: 'Healthy and full of flavour, a simple dish.' },
+                           { name: 'Black Pepper Beef',
+                             type: 'Chinese',
+                             summary: 'Delicious and rich in flavour. A Chinese classic.' }
+                         ];
+    }]);
+
+</script>
+
+</body>
+</html>
+
+

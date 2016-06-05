@@ -1,0 +1,11 @@
+
+body {
+    padding: 50px;
+}
+
+.recipe {
+    width: 300px;
+    min-height: 150px;
+    float: left;
+    margin: 10px;
+}

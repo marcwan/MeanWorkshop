@@ -1,0 +1,165 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".14.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".12.html">Prev</a></div>
+      <div style="text-align:center"><strong>02_mongodb_in_app</strong></div>
+    </div>
+
+    <h3>data/recipes.js</h3>
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">var</span> db <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&quot;./db.js&quot;</span>),
+    async <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;async&#39;</span>);
+
+<span style="color: #888888">/**</span>
+<span style="color: #888888"> *  start, number, callback </span>
+<span style="color: #888888"> *  start, number, ordervals, callback </span>
+<span style="color: #888888"> *  filterfieldvals, start, number, ordervals, callback </span>
+<span style="color: #888888"> */</span>
+exports.list_recipes <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span> () {
+    <span style="color: #008800; font-weight: bold">var</span> start, number, callback, ordervals, filterfieldvals;
+
+    <span style="color: #008800; font-weight: bold">switch</span> (arguments.length) {
+      <span style="color: #008800; font-weight: bold">case</span> <span style="color: #0000DD; font-weight: bold">3</span><span style="color: #333333">:</span>
+        start <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">0</span>];
+        number <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">1</span>];
+        callback <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">2</span>];
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span> <span style="color: #0000DD; font-weight: bold">4</span><span style="color: #333333">:</span>
+        start <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">0</span>];
+        number <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">1</span>];
+        ordervals <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">2</span>];
+        callback <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">3</span>];
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">case</span> <span style="color: #0000DD; font-weight: bold">5</span><span style="color: #333333">:</span>
+        filterfieldvals <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">0</span>];
+        start <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">1</span>];
+        number <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">2</span>];
+        ordervals <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">3</span>];
+        callback <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">4</span>];
+        <span style="color: #008800; font-weight: bold">break</span>;
+      <span style="color: #008800; font-weight: bold">default</span><span style="color: #333333">:</span>
+        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Error</span>(<span style="background-color: #fff0f0">&quot;This is not a valid use&quot;</span>);
+    }
+
+    <span style="color: #008800; font-weight: bold">var</span> filter <span style="color: #333333">=</span> filterfieldvals <span style="color: #333333">?</span> filterfieldvals <span style="color: #333333">:</span> {};
+    <span style="color: #008800; font-weight: bold">var</span> output <span style="color: #333333">=</span> [];
+    <span style="color: #008800; font-weight: bold">var</span> orderby <span style="color: #333333">=</span> ordervals <span style="color: #333333">?</span> ordervals <span style="color: #333333">:</span> { name <span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">1</span> };
+
+    <span style="color: #008800; font-weight: bold">var</span> cursor <span style="color: #333333">=</span> db.recipes.find(filter)
+        .sort(orderby)
+        .skip(start)
+        .limit(number);
+    cursor.on(<span style="background-color: #fff0f0">&quot;data&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> (recipe) {
+        output.push(recipe);
+    });
+    cursor.once(<span style="background-color: #fff0f0">&quot;end&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> () {
+        callback(<span style="color: #008800; font-weight: bold">null</span>, output);
+    });
+};
+
+<span style="color: #888888">/**</span>
+<span style="color: #888888"> * mandatory fields:</span>
+<span style="color: #888888"> *</span>
+<span style="color: #888888"> *     name: strin</span>
+<span style="color: #888888"> *     type: string</span>
+<span style="color: #888888"> *     summary: string</span>
+<span style="color: #888888"> *</span>
+<span style="color: #888888"> * also:</span>
+<span style="color: #888888"> *</span>
+<span style="color: #888888"> *     serves: int</span>
+<span style="color: #888888"> *     preparation_time: int</span>
+<span style="color: #888888"> *     cooking_time: int</span>
+<span style="color: #888888"> *     ingredients: [ string, ... ]</span>
+<span style="color: #888888"> *     preparation: string</span>
+<span style="color: #888888"> *</span>
+<span style="color: #888888"> * we add recipe_id in our database code.</span>
+<span style="color: #888888"> */</span>
+exports.add_recipe <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span> (recipe_data, callback) {
+    <span style="color: #008800; font-weight: bold">try</span> {
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>recipe_data.name) <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Error</span>(<span style="background-color: #fff0f0">&quot;missing_name&quot;</span>);
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>recipe_data.type) <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Error</span>(<span style="background-color: #fff0f0">&quot;missing_type&quot;</span>);
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>recipe_data.summary) <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Error</span>(<span style="background-color: #fff0f0">&quot;missing_summary&quot;</span>);
+    } <span style="color: #008800; font-weight: bold">catch</span> (e) {
+        callback({ error<span style="color: #333333">:</span> e.message, message<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;This is not a valid recipe.&quot;</span>});
+    }
+
+    async.waterfall([
+        <span style="color: #888888">// get a unique id for this new recipe.</span>
+        <span style="color: #008800; font-weight: bold">function</span> (cb) {
+            get_unique_recipe_id(recipe_data, cb);
+        },
+        <span style="color: #888888">// pass it on to the database.</span>
+        <span style="color: #008800; font-weight: bold">function</span> (recipe_id, cb) {
+            console.log(<span style="background-color: #fff0f0">&quot;did i get a recipeid?&quot;</span> <span style="color: #333333">+</span> recipe_id);
+            recipe_data <span style="color: #333333">=</span> JSON.parse(JSON.stringify(recipe_data));
+            recipe_data.recipe_id <span style="color: #333333">=</span> recipe_id;
+
+            db.recipes.insertOne(recipe_data, { w<span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">1</span> }, cb);            
+        },
+    ], <span style="color: #008800; font-weight: bold">function</span> (err, results) {
+        callback(err, results);
+    });
+};
+
+exports.get_recipe_by_id <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span> (recipe_id, callback) {
+    <span style="color: #008800; font-weight: bold">var</span> found_recipe <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span>;
+    
+    <span style="color: #008800; font-weight: bold">var</span> cursor <span style="color: #333333">=</span> db.recipes.find({ recipe_id<span style="color: #333333">:</span> recipe_id }).limit(<span style="color: #0000DD; font-weight: bold">1</span>);
+    cursor.on(<span style="background-color: #fff0f0">&quot;data&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> (recipe) {
+        found_recipe <span style="color: #333333">=</span> recipe;
+    });
+    cursor.on(<span style="background-color: #fff0f0">&quot;end&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> () {
+        console.log(JSON.stringify(found_recipe, <span style="color: #008800; font-weight: bold">null</span>, <span style="color: #0000DD; font-weight: bold">3</span>));
+        callback(<span style="color: #008800; font-weight: bold">null</span>, found_recipe);
+    });
+};
+
+
+
+<span style="color: #888888">/**</span>
+<span style="color: #888888"> * helper function to generate a recipe_id for us.</span>
+<span style="color: #888888"> */</span>
+<span style="color: #008800; font-weight: bold">function</span> get_unique_recipe_id (recipe_data, callback) {
+    <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>recipe_data.name) {
+        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">undefined</span>;
+    }
+
+    <span style="color: #008800; font-weight: bold">var</span> ok <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">false</span>;
+
+    <span style="color: #008800; font-weight: bold">var</span> proposed_id <span style="color: #333333">=</span> recipe_data.name.split(<span style="background-color: #fff0f0">&quot; &quot;</span>).join(<span style="background-color: #fff0f0">&quot;_&quot;</span>);
+
+    async.doUntil(
+        <span style="color: #008800; font-weight: bold">function</span> (cb) {
+            proposed_id <span style="color: #333333">+=</span> <span style="background-color: #fff0f0">&quot;&quot;</span> <span style="color: #333333">+</span> (<span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Date</span>().getTime());
+
+            <span style="color: #888888">// only set this to true if we see a recipe!</span>
+            ok <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">true</span>;
+            <span style="color: #008800; font-weight: bold">var</span> cursor <span style="color: #333333">=</span> db.recipes.find({ recipe_id<span style="color: #333333">:</span> proposed_id }).limit(<span style="color: #0000DD; font-weight: bold">1</span>);
+            cursor.on(<span style="background-color: #fff0f0">&quot;data&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> (recipe) {
+                console.log(<span style="background-color: #fff0f0">&quot;I got a recipe.....&quot;</span>);
+                <span style="color: #008800; font-weight: bold">if</span> (recipe) {
+                    ok <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">false</span>;
+                }
+            });
+            cursor.once(<span style="background-color: #fff0f0">&quot;end&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> () {
+                console.log(<span style="background-color: #fff0f0">&quot;Im done.....&quot;</span>);
+                cb(<span style="color: #008800; font-weight: bold">null</span>);
+            });
+        },
+        <span style="color: #008800; font-weight: bold">function</span> () {
+            console.log(<span style="background-color: #fff0f0">&quot;QUeried about OK: &quot;</span> <span style="color: #333333">+</span> ok);
+            <span style="color: #008800; font-weight: bold">return</span> ok;
+        },
+        <span style="color: #008800; font-weight: bold">function</span> (err, results) {
+            callback(err, proposed_id);
+        });
+    
+};
+</pre></div>
+
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+    "name": "recipe_app_server",
+    "description": "Simple backend for our recipes app.",
+    "private": true,
+    "dependencies": {
+        "async": "1.x",
+        "body-parser": "1.x",
+        "express": "4.x",
+        "morgan": "1.x"
+    }
+}

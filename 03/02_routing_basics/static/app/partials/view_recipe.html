@@ -1,0 +1,33 @@
+
+<div class="right-button"><a href ng-href="#/recipes">Back ↩</a></div>
+
+  <div class="alert alert-danger" ng-show="page_load_error"> {{ page_load_error }} </div>
+
+  <div ng-show="!finished_loading"><h4 style="color: #aaaaaa"> Loading ... please wait a moment </h4></div>
+
+  <div ng-show="finished_loading">
+
+<div class="page-header">
+  <h1>{{ recipe.name }} <span class='smaller lighter'>({{ recipe.type }})</span></h1>
+  </div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div style="float: right">Serves: {{ recipe.serves }}</div>
+    <div><strong>Preparation Time</strong>: {{ recipe.preparation_time }} minute(s) </div>
+  </div>
+  <div class="panel-body"> {{ recipe.summary }}</div>
+</div>
+
+<div class="bs-callout bs-callout-info">
+<h4>Ingredients</h4>
+<ul>
+  <li ng-repeat="ingredient in recipe.ingredients">{{ ingredient }}</li>
+</ul>
+</div>
+
+<div class="bs-callout bs-callout-info" style="margin-top: 30px">
+<h4>Preparation</h4>
+<p class="preparation" style='font-family: Helvetica'> {{ recipe.preparation }} </p>
+</div>
+</div>

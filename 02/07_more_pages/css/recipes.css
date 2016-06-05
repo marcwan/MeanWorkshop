@@ -1,0 +1,41 @@
+
+body {
+    padding: 50px;
+}
+
+.recipe {
+    width: 300px;
+    min-height: 150px;
+    float: left;
+    margin: 10px;
+}
+.recipe-editor {
+    width: 600px;
+    float: left;
+    margin: 10px;
+}
+
+.recipe-editor textarea {
+    border-color: dddddd;
+}
+
+.smaller {
+    font-size: 15pt;
+}
+
+.lighter {
+    color: #aaaaaa;
+}
+
+p.preparation {white-space: pre}
+
+.right-button {
+    float: right;
+    padding: 10px;
+    font-size: 125%;
+}
+
+.bs-callout{padding:10px 20px;margin:10px 0;border:1px solid #eee;border-left-width:5px;border-radius:3px}
+.bs-callout h4{margin-top:0;margin-bottom:5px}
+.bs-callout-info{border-left-color:#1b809e}
+.bs-callout-info h4{color:#1b809e}

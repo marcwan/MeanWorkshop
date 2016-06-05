@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: left; padding 10px"><a href=".04.html">Prev</a></div>
+      <div style="float: right; padding 10px"><a href=".06.html">Next</a></div>
+    </div>
+
+<pre>
+&lt;html ng-app&gt;
+&lt;head&gt;
+  &lt;link rel="stylesheet" href="css/bootstrap.css"&gt;
+  &lt;script type='text/javascript' src="angular.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body style="padding: 50px" 
+      <strong>ng-init="recipes = [ 'Pasta al Pesto', 'Garlic Broccoli',
+                           'Garlic Pork', 'Black Pepper Beef' ]"&gt;</strong>
+
+  &lt;ul&gt;
+    &lt;li <strong>ng-repeat="recipe in recipes"</strong>&gt;{{ recipe }}&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;p&gt; There are {{ <strong>recipes.length</strong> }} recipes so far!&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+  </body>
+</html>

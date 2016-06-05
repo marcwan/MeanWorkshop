@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: left; padding 10px"><a href=".15.html">Prev</a></div>
+      <div style="text-align:center"><strong>03_add_recipe</strong></div>
+    </div>
+
+    <h3> recipe_list.html </h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">&lt;!-- skipping top parts --&gt;</span>
+    <span style="color: #007700">&lt;h3</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;margin-top: 50px&quot;</span><span style="color: #007700">&gt;</span> Add New Recipe<span style="color: #007700">&lt;/h3&gt;</span>
+<strong>    <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;alert alert-danger&quot;</span>
+         <span style="color: #0000CC">ng-show=</span><span style="background-color: #fff0f0">&quot;add_recipe_error&quot;</span> <span style="color: #0000CC">role=</span><span style="background-color: #fff0f0">&quot;alert&quot;</span><span style="color: #007700">&gt;</span>
+         {{ add_recipe_error }}<span style="color: #007700">&lt;/div&gt;</span></strong>
+
+    <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;recipe-editor panel panel-default&quot;</span><span style="color: #007700">&gt;</span>
+      <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;panel-heading&quot;</span><span style="color: #007700">&gt;</span>
+        <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Recipe Name...&quot;</span> <span style="color: #0000CC">size=</span><span style="background-color: #fff0f0">&quot;30&quot;</span> <span style="color: #0000CC">
+               ng-model=</span><span style="background-color: #fff0f0">&quot;new_recipe.name&quot;</span><span style="color: #007700">/&gt;</span>
+        <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;recipename&quot;</span> <span style="color: #007700">&gt;</span>
+          <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Type of Cuisine&quot;</span>
+                 <span style="color: #0000CC">size=</span><span style="background-color: #fff0f0">&quot;30&quot;</span> <span style="color: #0000CC">ng-model=</span><span style="background-color: #fff0f0">&quot;new_recipe.type&quot;</span><span style="color: #007700">/&gt;</span>
+        <span style="color: #007700">&lt;/div&gt;</span>
+      <span style="color: #007700">&lt;/div&gt;</span>
+      <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;panel-body&quot;</span><span style="color: #007700">&gt;</span>
+        <span style="color: #007700">&lt;p&gt;</span>
+          <span style="color: #007700">&lt;textarea</span> <span style="color: #0000CC">ng-model=</span><span style="background-color: #fff0f0">&quot;new_recipe.summary&quot;</span> <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Summary...&quot;</span>
+                    <span style="color: #0000CC">rows=</span><span style="background-color: #fff0f0">&#39;4&#39;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width: 100%&quot;</span><span style="color: #007700">&gt;&lt;/textarea&gt;</span>
+        <span style="color: #007700">&lt;/p&gt;</span>
+        <span style="color: #007700">&lt;p&gt;</span>
+          <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">ng-model=</span><span style="background-color: #fff0f0">&quot;new_recipe.preparation_time&quot;</span>
+                 <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Preparation Time...&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width: 100%&quot;</span><span style="color: #007700">/&gt;</span>
+          <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">ng-model=</span><span style="background-color: #fff0f0">&quot;new_recipe.cooking_time&quot;</span>
+                 <span style="color: #0000CC">placeholder=</span><span style="background-color: #fff0f0">&quot;Cooking Time...&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width: 100%&quot;</span><span style="color: #007700">/&gt;</span>
+        <span style="color: #007700">&lt;/p&gt;</span>
+<strong>        <span style="color: #007700">&lt;button</span> <span style="color: #0000CC">ng-click=</span><span style="background-color: #fff0f0">&quot;addRecipe(new_recipe)&quot;</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;button&quot;</span>
+                <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;btn btn-success&quot;</span><span style="color: #007700">&gt;</span>Save Recipe<span style="color: #007700">&lt;/button&gt;</span></strong>
+      <span style="color: #007700">&lt;/div&gt;</span>
+<span style="color: #888888">&lt;!-- skip bottom --&gt;</span>
+</pre></div>
+
+
+  </body>
+</html>
+

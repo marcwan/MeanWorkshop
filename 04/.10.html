@@ -1,0 +1,137 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".11.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".09.html">Prev</a></div>
+      <div style="text-align:center"><strong>02_mongodb_in_app</strong></div>
+    </div>
+
+    <h3>index.js</h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">var</span> express <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;express&#39;</span>),
+    bodyParser <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;body-parser&#39;</span>),
+    morgan <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&#39;morgan&#39;</span>),
+    recipe_handler <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&quot;./handlers/recipes.js&quot;</span>),
+    db <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&quot;./data/db.js&quot;</span>),
+    async <span style="color: #333333">=</span> require(<span style="background-color: #fff0f0">&quot;async&quot;</span>);
+
+<span style="color: #008800; font-weight: bold">var</span> _port <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">8082</span>;
+
+<span style="color: #008800; font-weight: bold">var</span> app <span style="color: #333333">=</span> express();
+
+app.use(morgan(<span style="background-color: #fff0f0">&#39;dev&#39;</span>));
+app.use(bodyParser.json());
+app.use(express.<span style="color: #008800; font-weight: bold">static</span>(__dirname <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;/../static&quot;</span>));
+
+app.get(<span style="background-color: #fff0f0">&quot;/v1/recipes.json&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> (req, res) {
+    <span style="color: #008800; font-weight: bold">var</span> start <span style="color: #333333">=</span> req.query.start <span style="color: #333333">?</span> <span style="color: #007020">parseInt</span>(req.query.start) <span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">0</span>;
+    <span style="color: #008800; font-weight: bold">var</span> count <span style="color: #333333">=</span> req.query.pageSize <span style="color: #333333">?</span> <span style="color: #007020">parseInt</span>(req.query.pageSize) <span style="color: #333333">:</span> <span style="color: #0000DD; font-weight: bold">100</span>;
+
+    recipe_handler.get_recipes(start, pageSize, <span style="color: #008800; font-weight: bold">function</span> (err, recipes) {
+        <span style="color: #008800; font-weight: bold">if</span> (err) {
+            <span style="color: #008800; font-weight: bold">return</span> send_error_resp(res, err);
+        } <span style="color: #008800; font-weight: bold">else</span> {
+            <span style="color: #008800; font-weight: bold">return</span> send_success_resp(res, recipes);
+        }
+    });
+});
+
+app.get(<span style="background-color: #fff0f0">&quot;/v1/recipes/:recipe_id.json&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> (req, res) {
+    recipe_handler.get_recipe_by_id(req.params.recipe_id, <span style="color: #008800; font-weight: bold">function</span> (err, recipe) {
+        <span style="color: #008800; font-weight: bold">if</span> (err) {
+            <span style="color: #008800; font-weight: bold">return</span> send_error_resp(res, err);
+        } <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>recipe) {
+            <span style="color: #008800; font-weight: bold">return</span> send_error_resp(res, <span style="color: #0000DD; font-weight: bold">400</span>, <span style="background-color: #fff0f0">&quot;no_such_recipe&quot;</span>,
+                                   <span style="background-color: #fff0f0">&quot;That does not appear to be a valid recipe.&quot;</span>);
+        } <span style="color: #008800; font-weight: bold">else</span> {
+            send_success_resp(res, recipe);
+        }
+    });
+});
+
+app.put(<span style="background-color: #fff0f0">&quot;/v1/recipes.json&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> (req, res) {
+    recipe_handler.add_recipe(req.body, <span style="color: #008800; font-weight: bold">function</span>(err, recipe) {
+        <span style="color: #008800; font-weight: bold">if</span> (err) {
+            <span style="color: #008800; font-weight: bold">return</span> send_error_resp(res, err);
+        } <span style="color: #008800; font-weight: bold">else</span> {
+            <span style="color: #008800; font-weight: bold">return</span> send_success_resp(res, recipe);
+        }
+    });
+});
+
+
+
+db.init_db(<span style="color: #008800; font-weight: bold">function</span> (err) {
+    <span style="color: #008800; font-weight: bold">if</span> (err) {
+        console.log(<span style="background-color: #fff0f0">&quot;Error initialising DB, aborting: &quot;</span> <span style="color: #333333">+</span> JSON.stringify(err, <span style="color: #0000DD; font-weight: bold">0</span>, <span style="color: #0000DD; font-weight: bold">2</span>));
+        exit(<span style="color: #333333">-</span><span style="color: #0000DD; font-weight: bold">1</span>);
+    } <span style="color: #008800; font-weight: bold">else</span> {
+        console.error(<span style="background-color: #fff0f0">&quot;Starting Server.&quot;</span>);
+        app.listen(_port);
+    }
+});
+
+
+
+
+
+
+
+<span style="color: #888888">/**</span>
+<span style="color: #888888"> * res, http_status, code, message</span>
+<span style="color: #888888"> * res, http_status, err obj</span>
+<span style="color: #888888"> * res, err obj</span>
+<span style="color: #888888"> */</span>
+<span style="color: #008800; font-weight: bold">function</span> send_error_resp() {
+    <span style="color: #008800; font-weight: bold">var</span> res, http_status, code, message;
+    <span style="color: #008800; font-weight: bold">if</span> (arguments.length <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">4</span>) {
+        res <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">0</span>];
+        http_status <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">1</span>];
+        code <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">2</span>];
+        message <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">3</span>];
+    } <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (arguments.length <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">3</span>) {
+        res <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">0</span>];
+        http_status <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">1</span>];
+        code <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">2</span>].error;
+        message <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">2</span>].message;
+    } <span style="color: #008800; font-weight: bold">else</span> <span style="color: #008800; font-weight: bold">if</span> (arguments.length <span style="color: #333333">==</span> <span style="color: #0000DD; font-weight: bold">2</span>) {
+        res <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">0</span>];
+        http_status <span style="color: #333333">=</span> _http_code_from_error(arguments[<span style="color: #0000DD; font-weight: bold">1</span>].error);
+        code <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">1</span>].error;
+        message <span style="color: #333333">=</span> arguments[<span style="color: #0000DD; font-weight: bold">1</span>].message;
+    } <span style="color: #008800; font-weight: bold">else</span> {
+        console.error(<span style="background-color: #fff0f0">&quot;send_error_resp: YOU&#39;RE DOING IT WRONG&quot;</span>);
+        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Error</span>(<span style="background-color: #fff0f0">&quot;send_error_resp called wrong-est-ly&quot;</span>);
+    }
+
+    res.setHeader(<span style="background-color: #fff0f0">&#39;Content-Type&#39;</span>, <span style="background-color: #fff0f0">&#39;application/json&#39;</span>);
+    res.status(http_status).send(JSON.stringify({ error<span style="color: #333333">:</span> code, message<span style="color: #333333">:</span> message }));
+    res.end();
+}
+
+<span style="color: #008800; font-weight: bold">function</span> send_success_resp(res, obj) {
+    <span style="color: #008800; font-weight: bold">if</span> (arguments.length <span style="color: #333333">!=</span> <span style="color: #0000DD; font-weight: bold">2</span>) {
+        console.error(<span style="background-color: #fff0f0">&quot;send_success_resp: YOU&#39;RE DOING IT WRONG&quot;</span>);
+        <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Error</span>();
+    }
+    res.setHeader(<span style="background-color: #fff0f0">&#39;Content-Type&#39;</span>, <span style="background-color: #fff0f0">&#39;application/json&#39;</span>);
+    res.status(<span style="color: #0000DD; font-weight: bold">200</span>).send(JSON.stringify(obj));
+    res.end();
+}
+
+
+<span style="color: #008800; font-weight: bold">function</span> _http_code_from_error (error_code) {
+    <span style="color: #008800; font-weight: bold">switch</span> (error_code) {
+      <span style="color: #888888">// add other messages here when they&#39;re not server problems.</span>
+      <span style="color: #008800; font-weight: bold">default</span><span style="color: #333333">:</span>
+        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0000DD; font-weight: bold">503</span>;
+    }
+}
+</pre></div>
+
+  </body>
+</html>
+
+

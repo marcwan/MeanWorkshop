@@ -1,0 +1,32 @@
+<html ng-app>
+<head>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script type='text/javascript' src="angular.min.js"></script>
+</head>
+<body style="padding: 50px" 
+      ng-init="recipes = [ 
+               { name: 'Pasta al Pesto', type: 'Italian',
+                 summary: 'A quick and simple dish for any Italian household.' },
+               { name: 'Garlic Broccoli', type: 'Chinese',
+                 summary: 'Healthy and full of flavour, a simple dish.' },
+               { name: 'Garlic Pork', type: 'Thai',
+                 summary: 'A quick and simple meat dish for any Thai table.' },
+               { name: 'Black Pepper Beef', type: 'Chinese',
+                 summary: 'Delicious and rich in flavour. A Chinese classic.' },]">
+
+
+  <p>Filter list: <input ng-model="searchFor" size="30"/></p>
+
+  <div style="width: 300px; float: left; margin-right: 20px; min-height: 125px"
+       ng-repeat="recipe in filtered = (recipes | filter:searchFor)"
+       class="panel panel-default">
+    <div class="panel-heading"> {{ recipe.name }} ({{ recipe.type }})</div>
+    <div class="panel-body">
+      {{ recipe.summary }}
+    </div>
+  </div>
+  <div style="clear: left"></div>
+  <p> There are {{ filtered.length }} recipes that match!</p>
+
+</body>
+</html>

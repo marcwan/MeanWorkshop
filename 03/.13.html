@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".14.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".12.html">Prev</a></div>
+      <div style="text-align:center"><strong>03_add_recipe</strong></div>
+    </div>
+
+    <h3> index.js </h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">
+
+app.put(<span style="background-color: #fff0f0">&quot;/v1/recipes.json&quot;</span>, <span style="color: #008800; font-weight: bold">function</span> (req, res) {
+    <span style="color: #008800; font-weight: bold">var</span> rid <span style="color: #333333">=</span> get_unique_recipe_id(req.body);
+
+    <span style="color: #008800; font-weight: bold">try</span> {
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>req.body.name) <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Error</span>(<span style="background-color: #fff0f0">&quot;missing_name&quot;</span>);
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>req.body.type) <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Error</span>(<span style="background-color: #fff0f0">&quot;missing_type&quot;</span>);
+        <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>req.body.summary) <span style="color: #008800; font-weight: bold">throw</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Error</span>(<span style="background-color: #fff0f0">&quot;missing_summary&quot;</span>);
+    } <span style="color: #008800; font-weight: bold">catch</span> (e) {
+        <span style="color: #008800; font-weight: bold">return</span> send_error_resp(res, <span style="color: #0000DD; font-weight: bold">400</span>, e.message,
+          <span style="background-color: #fff0f0">&quot;You sent us an invalid recipe.&quot;</span>);
+    }
+
+    req.body.recipe_id <span style="color: #333333">=</span> rid;
+    recipes.push(JSON.parse(JSON.stringify(req.body)));
+    send_success_resp(res, req.body);
+});
+
+
+<span style="color: #888888">// This would be more efficient w hashing instead of array iteration, but</span>
+<span style="color: #888888">// we&#39;re moving this to a database in a few minutes anyway, so no worries.</span>
+<span style="color: #008800; font-weight: bold">function</span> get_unique_recipe_id (recipe_data) {
+    <span style="color: #008800; font-weight: bold">if</span> (<span style="color: #333333">!</span>recipe_data.name) {
+        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">undefined</span>;
+    }
+    
+    <span style="color: #008800; font-weight: bold">var</span> proposed_id <span style="color: #333333">=</span> recipe_data.name.split(<span style="background-color: #fff0f0">&quot; &quot;</span>).join(<span style="background-color: #fff0f0">&quot;_&quot;</span>)
+           <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;&quot;</span> <span style="color: #333333">+</span> (<span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Date</span>().getTime());
+    <span style="color: #008800; font-weight: bold">var</span> unique <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">false</span>;
+    <span style="color: #008800; font-weight: bold">while</span> (<span style="color: #333333">!</span>unique) {
+        <span style="color: #008800; font-weight: bold">var</span> i;
+        <span style="color: #008800; font-weight: bold">for</span> (i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>; i <span style="color: #333333">&lt;</span> recipes.length; i<span style="color: #333333">++</span>) {
+            <span style="color: #008800; font-weight: bold">if</span> (recipes[i].recipe_id <span style="color: #333333">==</span> proposed_id) {
+                <span style="color: #008800; font-weight: bold">break</span>;
+            }
+        }
+
+        <span style="color: #008800; font-weight: bold">if</span> (i <span style="color: #333333">==</span> recipes.length) {
+            unique <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">true</span>;
+        } <span style="color: #008800; font-weight: bold">else</span> {
+            proposed_id <span style="color: #333333">=</span> proposed_id <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;&quot;</span> <span style="color: #333333">+</span> (<span style="color: #008800; font-weight: bold">new</span> <span style="color: #007020">Date</span>().getTime());
+        }
+    }
+
+    <span style="color: #008800; font-weight: bold">return</span> proposed_id;
+}
+
+</pre></div>
+
+
+
+  </body>
+</html>
+

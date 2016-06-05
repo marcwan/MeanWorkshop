@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".30.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".28.html">Prev</a></div>
+      <div style="text-align: center"><strong>08_data_consolidation</strong></div>
+    </div>
+
+    <h3>Adding Data Services</h3>
+
+    <pre>
+      % mkdir services
+      % cd services
+      % cp -fR ../pages/* .  (Windows: xcopy /s ..\pages\* )
+    </pre>
+
+    <h3>Create these files</h3>
+    <pre>
+      index.html
+      app/app.js
+      app/controller/recipelistcontroller.js
+      app/controller/viewrecipecontroller.js
+      app/partials/recipe_list.html
+      app/partials/view_recipe.html
+      <strong>app/services/recipeprovider.js</strong>
+      js/angular.min.js
+      js/angular-route.min.js
+      js/angular-route.min.js
+      css/style.css
+      css/*
+      fonts/*
+    </pre>
+
+  </body>
+</html>

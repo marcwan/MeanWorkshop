@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".10.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".08.html">Prev</a></div>
+      <div style="text-align:center"><strong>02_routing_basics</strong></div>
+    </div>
+
+<h3> recipelistcontroller.js </h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">(<span style="color: #008800; font-weight: bold">function</span> () {
+
+    <span style="color: #888888">// 1. declare our controller.</span>
+    <span style="color: #008800; font-weight: bold">function</span> RecipeListController ($scope, recipeProvider) {
+
+        $scope.new_recipe <span style="color: #333333">=</span> { };
+        $scope.add_recipe_error <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;&quot;</span>;
+
+        $scope.page_load_error <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span>;
+        $scope.finished_loading <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">false</span>;
+
+<strong>        $scope.recipes <span style="color: #333333">=</span> recipeProvider.getAllRecipes(<span style="color: #008800; font-weight: bold">function</span> (err, recipes) {
+            $scope.finished_loading <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">true</span>;
+            <span style="color: #008800; font-weight: bold">if</span> (err) {
+                $scope.page_load_error <span style="color: #333333">=</span> err.message;
+            } <span style="color: #008800; font-weight: bold">else</span> {
+                $scope.recipes <span style="color: #333333">=</span> recipes;
+            }                
+        });</strong>
+    
+        $scope.addRecipe <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span> (recipe_data) {
+         <span style="color: #888888">// implement me!</span>
+        };
+
+    }
+
+    <span style="color: #888888">// 2. create the controller and give it $scope.</span>
+    recipesApp.controller(<span style="background-color: #fff0f0">&quot;RecipeListController&quot;</span>, [<span style="background-color: #fff0f0">&#39;$scope&#39;</span>, <span style="background-color: #fff0f0">&#39;recipeProvider&#39;</span>, RecipeListController]);
+
+})();
+</pre></div>
+
+
+
+  </body>
+</html>
+

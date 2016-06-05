@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".23.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".21.html">Prev</a></div>
+      <div style="text-align: center"><strong>07_more_pages</strong></div>
+    </div>
+
+    <h3>Adding another page</h3>
+    <p> Another partial, another controller. </p>
+
+    <pre>
+      % mkdir pages
+      % cd pages
+      % cp -fR ../routes/* .  (Windows: xcopy /s ..\routes\* )
+    </pre>
+
+    <h3>Create these files</h3>
+    <pre>
+      index.html
+      app/app.js
+      app/controller/recipelistcontroller.js
+      <strong>app/controller/viewrecipecontroller.js</strong>
+      app/partials/recipe_list.html
+      <strong>app/partials/view_recipe.html</strong>
+      js/angular.min.js
+      js/angular-route.min.js
+      js/angular-route.min.js
+      css/style.css
+      css/*
+      fonts/*
+    </pre>
+
+  </body>
+</html>

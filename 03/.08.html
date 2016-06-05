@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".09.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".07.html">Prev</a></div>
+      <div style="text-align:center"><strong>02_routing_basics</strong></div>
+    </div>
+
+    <h3>recipeprovider.js </h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">(<span style="color: #008800; font-weight: bold">function</span> () {
+
+    <span style="color: #008800; font-weight: bold">function</span> recipeProvider ($http) {
+
+        <span style="color: #008800; font-weight: bold">this</span>._server_host <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;&quot;</span>;
+        <span style="color: #008800; font-weight: bold">this</span>.getAllRecipes <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span> (callback) {
+            $http.get(<span style="color: #008800; font-weight: bold">this</span>._server_host <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;/v1/recipes.json&quot;</span>)
+                .success(<span style="color: #008800; font-weight: bold">function</span> (data, status, headers, conf) {
+                    callback(<span style="color: #008800; font-weight: bold">null</span>, data);
+                })
+                .error(<span style="color: #008800; font-weight: bold">function</span> (data, status, headers, conf) {
+                    callback(data);
+                });
+        };
+
+        <span style="color: #008800; font-weight: bold">this</span>.addRecipe <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span> (recipe_data) {
+        };
+<strong>
+        <span style="color: #008800; font-weight: bold">this</span>.getRecipeById <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">function</span> (recipe_id, callback) {
+            $http.get(<span style="color: #008800; font-weight: bold">this</span>._server_host <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;/v1/recipes/&quot;</span> <span style="color: #333333">+</span> recipe_id <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&quot;.json&quot;</span>)
+                .success(<span style="color: #008800; font-weight: bold">function</span> (data, status, headers, conf) {
+                    callback(<span style="color: #008800; font-weight: bold">null</span>, data);
+                })
+                .error(<span style="color: #008800; font-weight: bold">function</span> (data, status, headers, conf) {
+                    callback(data);
+                });
+        };
+</strong                
+    }
+
+    recipesApp.service(<span style="background-color: #fff0f0">&quot;recipeProvider&quot;</span>, [ <span style="background-color: #fff0f0">&quot;$http&quot;</span>, recipeProvider ]);
+
+})();
+</pre></div>
+
+  </body>
+</html>
+

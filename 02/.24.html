@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <link rel="stylesheet" href=".style.css">
+  </head>
+  <body>
+    <div class="header">
+      <div style="float: right; padding 10px"><a href=".25.html">Next</a></div>
+      <div style="float: left; padding 10px"><a href=".23.html">Prev</a></div>
+      <div style="text-align: center"><strong>07_more_pages</strong></div>
+    </div>
+
+    <h3>app.js</h3>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">var</span> recipesApp <span style="color: #333333">=</span> angular.module(<span style="background-color: #fff0f0">&quot;recipesApp&quot;</span>, [ <span style="background-color: #fff0f0">&quot;ngRoute&quot;</span> ]);
+
+recipesApp.config(<span style="color: #008800; font-weight: bold">function</span> ($routeProvider) {
+    $routeProvider
+        .when(<span style="background-color: #fff0f0">&quot;/recipes&quot;</span>,  { controller<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;RecipeListController&quot;</span>,
+                             templateUrl<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;/app/partials/recipe_list.html&quot;</span> })
+<strong>        .when(<span style="background-color: #fff0f0">&quot;/recipes/:recipe_id&quot;</span>,  { controller<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;ViewRecipeController&quot;</span>,
+                             templateUrl<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;/app/partials/view_recipe.html&quot;</span> })</strong>
+        .when(<span style="background-color: #fff0f0">&quot;/&quot;</span>,  { redirectTo<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;/recipes&quot;</span> })
+        .otherwise({ redirectTo<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;/404_page&quot;</span> });
+});
+</pre></div>
+
+  </body>
+</html>
+
+
